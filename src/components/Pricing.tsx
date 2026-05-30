@@ -3,46 +3,45 @@ import { CheckCircle } from 'lucide-react';
 export default function Pricing() {
   const plans = [
     {
-      name: 'Basic',
-      price: '$299',
-      period: '5 Lessons',
-      description: 'Perfect for beginners',
+      name: 'Standard Practice',
+      price: '₹6,500',
+      period: '/ 10 Days Class',
+      description: 'Perfect for hands-on, daily practice to master control and confidence.',
       features: [
-        'Professional instructor',
-        'Vehicle provided',
-        'Flexible scheduling',
-        'Basic driving theory',
-        'Email support'
+        '10 days intensive practical training',
+        'Dual-control modern training vehicle',
+        'Certified professional instructors',
+        'Parallel parking & reversing mastery',
+        'Basic driving theory & road signals'
       ],
       highlighted: false
     },
     {
-      name: 'Professional',
-      price: '$599',
-      period: '10 Lessons',
-      description: 'Most popular choice',
+      name: 'Complete DL Package',
+      price: '₹12,500',
+      period: '/ Full Course + License',
+      description: 'Our most comprehensive program, including complete practice and RTO License assistance.',
       features: [
-        'Expert instructor',
-        'Premium vehicle',
-        'Priority scheduling',
-        'Test preparation',
-        'Phone support',
-        'Progress tracking'
+        'Comprehensive practical training course',
+        'Complete Driving License (DL) assistance',
+        'Official RTO mock test preparation',
+        'Dual-control vehicle provided for RTO test',
+        'Elite senior instructors & premium fleet',
+        'Flexible scheduling & progress tracking'
       ],
       highlighted: true
     },
     {
-      name: 'Premium',
-      price: '$899',
-      period: '15 Lessons',
-      description: 'Comprehensive program',
+      name: 'Extra Coaching',
+      price: '₹650',
+      period: '/ Per Day',
+      description: 'Need extra practice? Get flexible daily coaching sessions on-demand.',
       features: [
-        'Senior instructor',
-        'Latest vehicles',
-        'Dedicated scheduling',
-        'Full test prep',
-        '24/7 support',
-        'Lifetime materials access'
+        '₹650 per day additional practice cost',
+        'Flexible day-by-day customized training',
+        'Focus on specific skills (e.g. night driving)',
+        'One-on-one instruction with your vehicle',
+        'Convenient local pick-up and drop-off'
       ],
       highlighted: false
     }

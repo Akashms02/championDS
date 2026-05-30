@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { Star, User } from 'lucide-react';
 
 export default function Testimonials() {
   const testimonials = [
@@ -41,7 +41,13 @@ export default function Testimonials() {
                 {testimonial.feedback}
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-600 rounded-full"></div>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-md bg-gradient-to-br ${
+                  index === 0 ? 'from-blue-500 to-indigo-600' :
+                  index === 1 ? 'from-amber-500 to-orange-600' :
+                  'from-emerald-500 to-teal-600'
+                }`}>
+                  <User size={18} />
+                </div>
                 <div>
                   <p className="font-bold text-gray-900">{testimonial.name}</p>
                   <p className="text-sm text-gray-600">{testimonial.role}</p>
