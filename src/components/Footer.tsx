@@ -40,7 +40,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="#" 
+                href="https://www.facebook.com/share/1BFfdaUik1/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full bg-gray-800 hover:bg-blue-600 flex items-center justify-center text-gray-400 hover:text-white shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
