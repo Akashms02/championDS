@@ -1,39 +1,104 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import '../styles/animations.css';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      // Simple active section detection
+      const sections = ['home', 'about', 'pricing', 'testimonials', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { label: 'Home', href: '/#home', id: 'home' },
+    { label: 'About us', href: '/#about', id: 'about' },
+    { label: 'Pricing', href: '/#pricing', id: 'pricing' },
+    { label: 'Testimonials', href: '/#testimonials', id: 'testimonials' },
+    { label: 'Contact us', href: '/#contact', id: 'contact' },
+  ];
 
   return (
-    <nav className="fixed w-full top-0 bg-white shadow-md z-50">
+    <nav className={`fixed w-full top-0 left-0 z-50 transition-all duration-300 ${
+      scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-white/80 backdrop-blur-sm py-4'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo Section - Custom logo applied */}
-          <div className="flex items-center gap-2 animate-fade-in-down">
-            <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center overflow-hidden shadow-lg border border-amber-500/20">
-              <img src="/logo.png" alt="Prime Champion Drive Academy" className="w-full h-full object-cover scale-110" />
-            </div>
-            <span className="text-xl font-bold text-blue-600 hidden sm:inline">Prime Champion Drive Academy</span>
-            <span className="text-lg font-bold text-blue-600 sm:hidden">Prime Champion</span>
-          </div>
+        <div className="flex justify-between items-center">
           
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="hover:text-blue-600 transition font-medium">Home</a>
-            <a href="#about" className="hover:text-blue-600 transition font-medium">About</a>
-            <a href="#pricing" className="hover:text-blue-600 transition font-medium">Pricing</a>
-            <a href="#testimonials" className="hover:text-blue-600 transition font-medium">Testimonials</a>
-            <a href="#contact" className="hover:text-blue-600 transition font-medium">Contact</a>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-semibold transform hover:scale-105 duration-300">
+          {/* Logo Section - Custom logo applied with a premium clean look */}
+          <a href="/#home" className="flex items-center gap-3 animate-fade-in-down">
+            <div className="h-14 md:h-16 w-auto flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
+              <img 
+                src="/logo.svg" 
+                alt="Prime Champion Drive Academy" 
+                className="h-full w-auto object-contain"
+                onError={(e) => {
+                  // Fallback if svg fails
+                  (e.target as HTMLImageElement).src = '/logo.png';
+                }}
+              />
+            </div>
+          </a>
+          
+          {/* Desktop Menu - Centered Rounded Pill as in the reference */}
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="bg-white border border-gray-150 px-6 py-2 rounded-xl shadow-xs flex items-center gap-6 lg:gap-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className={`transition-colors duration-300 font-medium text-sm px-1 py-0.5 relative group ${
+                    activeSection === link.id
+                      ? 'text-brand-red'
+                      : 'text-gray-600 hover:text-brand-red'
+                  }`}
+                >
+                  {link.label}
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-brand-red transform origin-left transition-transform duration-300 ${
+                    activeSection === link.id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}></span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop CTA - Red theme alignment */}
+          <div className="hidden md:block">
+            <a
+              href="/#contact"
+              className="bg-brand-red text-white px-6 py-2.5 rounded-full hover:bg-brand-red-hover transition-all duration-300 font-semibold text-sm shadow-md shadow-brand-red/10 hover:shadow-lg hover:shadow-brand-red/20 transform hover:-translate-y-0.5 inline-block"
+            >
               Book Now
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition"
+            className="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -41,15 +106,30 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-3 border-t animate-slide-in-down">
-            <a href="#home" className="block py-2 hover:text-blue-600 transition font-medium">Home</a>
-            <a href="#about" className="block py-2 hover:text-blue-600 transition font-medium">About</a>
-            <a href="#pricing" className="block py-2 hover:text-blue-600 transition font-medium">Pricing</a>
-            <a href="#testimonials" className="block py-2 hover:text-blue-600 transition font-medium">Testimonials</a>
-            <a href="#contact" className="block py-2 hover:text-blue-600 transition font-medium">Contact</a>
-            <button className="w-full bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-semibold">
-              Book Now
-            </button>
+          <div className="md:hidden mt-3 py-4 px-2 space-y-2 bg-white border border-gray-100 rounded-xl shadow-xl animate-slide-in-down">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`block px-4 py-2 rounded-lg font-medium text-base transition-colors ${
+                  activeSection === link.id
+                    ? 'bg-brand-red-light text-brand-red'
+                    : 'text-gray-700 hover:bg-gray-50 hover:text-brand-red'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="pt-2 px-4">
+              <a
+                href="/#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-center bg-brand-red text-white py-3 rounded-lg hover:bg-brand-red-hover transition font-semibold"
+              >
+                Book Now
+              </a>
+            </div>
           </div>
         )}
       </div>
