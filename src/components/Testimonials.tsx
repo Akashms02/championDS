@@ -20,37 +20,44 @@ export default function Testimonials() {
   ];
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Don't just take our word for it. Hear from our satisfied students.
+    <section id="testimonials" className="py-16 md:py-24 bg-white relative overflow-hidden">
+      {/* Decorative gradients */}
+      <div className="absolute top-1/4 right-0 w-72 h-72 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <span className="text-brand-red text-sm font-extrabold uppercase tracking-widest bg-brand-red-light px-4 py-1.5 rounded-full">Testimonials</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 mb-4 font-display">What Our Students Say</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+            Don't just take our word for it. Hear from our satisfied, confident graduates.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white p-6 md:p-8 rounded-lg shadow hover:shadow-lg transition">
-              <div className="flex items-center gap-1 mb-4">
+            <div 
+              key={index} 
+              className="bg-gray-50/50 border border-gray-100 p-6 md:p-8 rounded-2xl shadow-xs hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div className="flex items-center gap-1 mb-5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
+                  <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-6 italic leading-relaxed text-sm md:text-base">
                 {testimonial.feedback}
               </p>
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-md bg-gradient-to-br ${
-                  index === 0 ? 'from-blue-500 to-indigo-600' :
-                  index === 1 ? 'from-amber-500 to-orange-600' :
-                  'from-emerald-500 to-teal-600'
+                  index === 0 ? 'from-brand-red to-red-700' :
+                  index === 1 ? 'from-gray-700 to-gray-900' :
+                  'from-red-500 to-orange-500'
                 }`}>
                   <User size={18} />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900">{testimonial.name}</p>
-                  <p className="text-sm text-gray-600">{testimonial.role}</p>
+                  <p className="font-bold text-gray-900 font-display">{testimonial.name}</p>
+                  <p className="text-xs font-semibold text-brand-red uppercase tracking-wider">{testimonial.role}</p>
                 </div>
               </div>
             </div>

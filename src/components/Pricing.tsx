@@ -48,11 +48,16 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Transparent Pricing</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+    <section id="pricing" className="py-16 md:py-24 bg-gray-50/50 relative overflow-hidden">
+      {/* Background accents */}
+      <div className="absolute top-1/2 left-0 w-80 h-80 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-0 right-10 w-64 h-64 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <span className="text-brand-red text-sm font-extrabold uppercase tracking-widest bg-brand-red-light px-4 py-1.5 rounded-full">Transparent Pricing</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 mb-4 font-display">Affordable Packages</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
             Choose the perfect plan for your driving journey. All prices include professional instruction and vehicle.
           </p>
         </div>
@@ -61,48 +66,48 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative p-8 rounded-lg transition-all duration-300 transform hover:scale-105 ${
+              className={`relative p-8 rounded-2xl transition-all duration-300 transform hover:scale-105 ${
                 plan.highlighted
-                  ? 'bg-blue-600 text-white shadow-2xl md:scale-105'
-                  : 'bg-white shadow-lg text-gray-900'
+                  ? 'bg-brand-red text-white shadow-2xl md:scale-105 border border-brand-red-hover'
+                  : 'bg-white shadow-lg text-gray-900 border border-gray-100'
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute top-0 right-0 bg-yellow-400 text-gray-900 px-4 py-1 rounded-bl-lg font-bold text-sm">
+                <div className="absolute top-0 right-0 bg-yellow-400 text-gray-950 px-4 py-1 rounded-tr-2xl rounded-bl-xl font-black text-xs uppercase tracking-wider">
                   POPULAR
                 </div>
               )}
 
-              <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-              <p className={`text-sm mb-4 ${plan.highlighted ? 'text-blue-100' : 'text-gray-600'}`}>
+              <h3 className="text-2xl font-bold mb-2 font-display">{plan.name}</h3>
+              <p className={`text-sm mb-5 leading-relaxed ${plan.highlighted ? 'text-brand-red-light/90' : 'text-gray-500'}`}>
                 {plan.description}
               </p>
 
               <div className="mb-6">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                <span className={`text-sm ml-2 ${plan.highlighted ? 'text-blue-100' : 'text-gray-600'}`}>
+                <span className="text-4xl font-extrabold font-display">{plan.price}</span>
+                <span className={`text-sm ml-2 font-semibold ${plan.highlighted ? 'text-brand-red-light/85' : 'text-gray-500'}`}>
                   {plan.period}
                 </span>
               </div>
 
               <button
-                className={`w-full py-3 rounded-lg font-semibold mb-6 transition-all duration-300 ${
+                className={`w-full py-3.5 rounded-full font-bold mb-6 transition-all duration-300 cursor-pointer shadow-xs ${
                   plan.highlighted
-                    ? 'bg-white text-blue-600 hover:bg-gray-100'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                    ? 'bg-white text-brand-red hover:bg-gray-100'
+                    : 'bg-brand-red text-white hover:bg-brand-red-hover'
                 }`}
               >
                 Get Started
               </button>
 
-              <ul className="space-y-3">
+              <ul className="space-y-3.5">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <CheckCircle
-                      size={20}
-                      className={plan.highlighted ? 'text-yellow-300' : 'text-blue-600'}
+                      size={18}
+                      className={plan.highlighted ? 'text-yellow-300 shrink-0' : 'text-brand-red shrink-0'}
                     />
-                    <span className="text-sm">{feature}</span>
+                    <span className="text-sm font-medium">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -110,13 +115,13 @@ export default function Pricing() {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <p className="text-gray-600 mb-4">
-            Need a custom package? <span className="font-semibold">Contact us for special pricing</span>
+        <div className="mt-16 text-center">
+          <p className="text-gray-600 mb-6 font-medium">
+            Need a custom package? <span className="font-bold text-brand-red">Contact us for special pricing</span>
           </p>
           <a
             href="#contact"
-            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
+            className="inline-block bg-brand-red text-white px-8 py-3.5 rounded-full hover:bg-brand-red-hover transition-all duration-300 font-bold shadow-md shadow-brand-red/10 hover:shadow-lg hover:shadow-brand-red/20 cursor-pointer"
           >
             Contact Sales Team
           </a>

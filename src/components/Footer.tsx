@@ -8,19 +8,25 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center overflow-hidden shadow-lg border border-amber-500/20">
-                <img src="/logo.png" alt="Prime Champion Drive Academy" className="w-full h-full object-cover scale-110" />
+              <div className="h-12 w-auto flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/logo.svg" 
+                  alt="Prime Champion Drive Academy" 
+                  className="h-full w-auto object-contain" 
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/logo.png';
+                  }}
+                />
               </div>
-              <span className="text-lg font-bold">Prime Champion DS</span>
             </div>
-            <p className="text-gray-400 text-sm mb-6">Professional driving school committed to your safety.</p>
+            <p className="text-gray-400 text-sm mb-6">Professional driving school committed to your safety and confidence.</p>
             {/* Social Icons */}
             <div className="flex gap-4">
               <a 
                 href="https://www.instagram.com/nithe_esh31?igsh=aThoeXhmc25jcWhi" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gradient-to-tr hover:from-yellow-600 hover:via-pink-600 hover:to-purple-600 flex items-center justify-center text-gray-400 hover:text-white shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                className="w-10 h-10 rounded-full bg-gray-800 hover:bg-brand-red flex items-center justify-center text-gray-450 hover:text-white shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
                 title="Instagram"
               >
                 <svg
@@ -43,7 +49,7 @@ export default function Footer() {
                 href="https://www.facebook.com/share/1BFfdaUik1/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-10 h-10 rounded-full bg-gray-800 hover:bg-blue-600 flex items-center justify-center text-gray-400 hover:text-white shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                className="w-10 h-10 rounded-full bg-gray-800 hover:bg-brand-red flex items-center justify-center text-gray-450 hover:text-white shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
                 title="Facebook"
               >
                 <svg
@@ -62,43 +68,43 @@ export default function Footer() {
               </a>
             </div>
           </div>
-
+ 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#home" className="hover:text-blue-400 transition">Home</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition">About</a></li>
-              <li><a href="#testimonials" className="hover:text-blue-400 transition">Testimonials</a></li>
-              <li><a href="#contact" className="hover:text-blue-400 transition">Contact</a></li>
+            <h4 className="text-lg font-bold mb-4 font-display">Quick Links</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><a href="#home" className="hover:text-brand-red transition">Home</a></li>
+              <li><a href="#about" className="hover:text-brand-red transition">About</a></li>
+              <li><a href="#testimonials" className="hover:text-brand-red transition">Testimonials</a></li>
+              <li><a href="#contact" className="hover:text-brand-red transition">Contact</a></li>
             </ul>
           </div>
-
+ 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Services</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#contact" className="hover:text-blue-400 transition">Driving Lessons</a></li>
-              <li><a href="#contact" className="hover:text-blue-400 transition">License Test Prep</a></li>
-              <li><a href="#contact" className="hover:text-blue-400 transition">Defensive Driving</a></li>
-              <li><a href="#contact" className="hover:text-blue-400 transition">Refresher Courses</a></li>
+            <h4 className="text-lg font-bold mb-4 font-display">Services</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><a href="#contact" className="hover:text-brand-red transition">Driving Lessons</a></li>
+              <li><a href="#contact" className="hover:text-brand-red transition">License Test Prep</a></li>
+              <li><a href="#contact" className="hover:text-brand-red transition">Defensive Driving</a></li>
+              <li><a href="#contact" className="hover:text-brand-red transition">Refresher Courses</a></li>
             </ul>
           </div>
-
+ 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Contact Info</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
+            <h4 className="text-lg font-bold mb-4 font-display">Contact Info</h4>
+            <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-center gap-2">
-                <Phone size={16} /> +91 99639 32158
+                <Phone size={15} className="text-brand-red" /> +91 99639 32158
               </li>
               <li className="flex items-center gap-2">
-                <Mail size={16} /> nitheeshreddyv@gmail.com
+                <Mail size={15} className="text-brand-red" /> nitheeshreddyv@gmail.com
               </li>
               <li className="flex gap-2 text-xs leading-relaxed">
-                <MapPin size={16} className="shrink-0 mt-0.5 text-blue-400" />
+                <MapPin size={15} className="shrink-0 mt-0.5 text-brand-red" />
                 <span>
-                  2nd Floor, No 712, Modi Hospital Rd, Mahalakshmi Puram, West of Chord Road, Stage 2, Nagapura, Bengaluru, Karnataka 560086
+                  2nd Floor, No 712, Modi Hospital Rd, Mahalakshmi Puram, Stage 2, Nagapura, Bengaluru, Karnataka 560086
                 </span>
               </li>
             </ul>
