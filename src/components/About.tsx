@@ -1,77 +1,157 @@
-import { Award, Car, Users } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function About() {
-  return (
-    <section id="about" className="py-16 md:py-24 bg-white relative overflow-hidden">
-      {/* Decorative accent background elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
+  const [progress, setProgress] = useState(0); // Holds raw scroll progress (0 to 1)
+  const [roadProgress, setRoadProgress] = useState(0); // Holds raw scroll progress (0 to 1) for road
+  const containerRef = useRef<HTMLDivElement>(null);
+  const roadRef = useRef<HTMLDivElement>(null);
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <span className="text-brand-red text-sm font-extrabold uppercase tracking-widest bg-brand-red-light px-4 py-1.5 rounded-full">Why Choose Us</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 mb-4 font-display">About Prime Champion</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
-            We've been helping students become confident, safe, and elite drivers for over a decade.
+  useEffect(() => {
+    const handleScroll = () => {
+      const viewportHeight = window.innerHeight;
+      
+      // 1. Calculate section scroll progress (for text word fade)
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const totalDistance = rect.height + viewportHeight;
+        const currentDistance = viewportHeight - rect.top;
+        const p = Math.max(0, Math.min(1, currentDistance / totalDistance));
+        setProgress(p);
+      }
+      
+      // 2. Calculate road scroll progress (for car driving)
+      if (roadRef.current) {
+        const rect = roadRef.current.getBoundingClientRect();
+        const totalDistance = rect.height + viewportHeight;
+        const currentDistance = viewportHeight - rect.top;
+        const p = Math.max(0, Math.min(1, currentDistance / totalDistance));
+        setRoadProgress(p);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    
+    // Initial measurement
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  // Proportional progress calculations
+  const carStartThreshold = 0.15;
+  const carProgressVal = roadProgress < carStartThreshold 
+    ? 0 
+    : (roadProgress - carStartThreshold) / (1 - carStartThreshold);
+
+  const textStartThreshold = 0.1;
+  const textEndThreshold = 0.55;
+  const textProgress = progress < textStartThreshold
+    ? 0
+    : progress > textEndThreshold
+      ? 1
+      : (progress - textStartThreshold) / (textEndThreshold - textStartThreshold);
+
+  // Paragraph Text Splits for Scroll Word-by-Word Animation
+  const paragraph1 = "At Prime Champion, We've Been Helping Learners Become Confident, Responsible, And Skilled Drivers For Over A Decade. Our Mission Is To Provide High-Quality Driver Education That Prioritizes Safety, Confidence, And Lifelong Driving Skills.";
+  const paragraph2 = "Whether You're A Complete Beginner Or Looking To Refine Your Driving Abilities, Our Expert Team Is Dedicated To Guiding You Every Step Of The Way Toward Becoming A Safe And Confident Driver.";
+
+  const words1 = paragraph1.split(" ");
+  const words2 = paragraph2.split(" ");
+  const totalWords = words1.length + words2.length;
+
+  const renderWords = (words: string[], startIndex: number) => {
+    return words.map((word, idx) => {
+      const globalIdx = startIndex + idx;
+      
+      // Distribute words evenly across the textProgress (0 to 1) range
+      const startVal = globalIdx / totalWords;
+      const endVal = Math.min(1, (globalIdx + 3) / totalWords); // Overlap slightly for smooth transition
+      
+      let opacity = 0.15; // Dimmed base state
+      if (textProgress > startVal) {
+        const factor = (textProgress - startVal) / (endVal - startVal);
+        opacity = 0.15 + 0.85 * Math.min(1, factor);
+      }
+      
+      return (
+        <span 
+          key={globalIdx} 
+          className="inline transition-opacity duration-200"
+          style={{ opacity }}
+        >
+          {word}{" "}
+        </span>
+      );
+    });
+  };
+
+  return (
+    <section 
+      id="about" 
+      ref={containerRef}
+      className="relative w-full flex flex-col md:flex-row bg-white overflow-hidden min-h-[550px] md:h-[650px] lg:h-[750px] xl:h-[800px]"
+    >
+      {/* Left Column: Content Text */}
+      <div className="w-full md:w-1/2 flex flex-col justify-center py-16 md:py-0 px-8 sm:px-16 lg:px-24 xl:px-32 z-10">
+        <h2 
+          className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-8 font-display uppercase text-left select-none"
+          style={{ letterSpacing: '1px' }}
+        >
+          About Us
+        </h2>
+        
+        <div className="space-y-6 text-gray-700 font-medium text-sm sm:text-base md:text-lg leading-relaxed max-w-xl text-left font-display">
+          <p>
+            {renderWords(words1, 0)}
+          </p>
+          <p>
+            {renderWords(words2, words1.length)}
           </p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Feature 1 */}
-          <div className="bg-gray-50/50 border border-gray-100 p-8 rounded-2xl hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-14 h-14 bg-brand-red-light rounded-xl flex items-center justify-center mb-6">
-              <Award className="w-8 h-8 text-brand-red" />
+      {/* Right Column: Interactive Road Visualization */}
+      <div ref={roadRef} className="w-full md:w-1/2 relative h-[450px] sm:h-[500px] md:h-full bg-[#ffffff] flex items-center justify-center overflow-hidden border-t md:border-t-0 md:border-l border-gray-100">
+        
+        {/* Road Container - Big Road matching reference */}
+        <div className="w-[85%] md:w-[80%] lg:w-[75%] h-full bg-[#fafafa] relative border-l border-r border-[#e5e7eb] flex justify-center shadow-[inset_0_0_20px_rgba(0,0,0,0.01)]">
+          
+          {/* Center Blue Lane Line */}
+          <div className="w-5 md:w-6 bg-[#60a5fa] h-full flex items-center justify-center relative">
+            
+            {/* GPS Cursor Indicator */}
+            <div className="absolute top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-600 border-2 border-white flex items-center justify-center shadow-lg shadow-blue-500/20 animate-pulse z-10">
+              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3L4 21L12 17L20 21L12 3Z" />
+              </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3 font-display">Expert Instructors</h3>
-            <p className="text-gray-600 leading-relaxed">
-              All our instructors are certified professionals with extensive experience in driver education and road safety.
-            </p>
+            
           </div>
 
-          {/* Feature 2 */}
-          <div className="bg-gray-50/50 border border-gray-100 p-8 rounded-2xl hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-14 h-14 bg-brand-red-light rounded-xl flex items-center justify-center mb-6">
-              <Car className="w-8 h-8 text-brand-red" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3 font-display">Modern Fleet</h3>
-            <p className="text-gray-600 leading-relaxed">
-              Learn in our well-maintained vehicles equipped with the latest safety features and technology.
-            </p>
+          {/* Top-Down Car Asset */}
+          <div 
+            className="absolute z-20"
+            style={{ 
+              top: `${100 - carProgressVal * 130}%`, 
+              left: '50%', 
+              transform: 'translate(-50%, -50%)',
+              width: 'clamp(140px, 45%, 320px)',
+              transition: 'top 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+            }}
+          >
+            <img 
+              src="/cartop.svg" 
+              alt="Champion Driving School Training Vehicle Top View" 
+              className="w-full h-auto drop-shadow-[0_20px_25px_rgba(0,0,0,0.25)] hover:scale-105 transition-transform duration-300 cursor-pointer"
+            />
           </div>
 
-          {/* Feature 3 */}
-          <div className="bg-gray-50/50 border border-gray-100 p-8 rounded-2xl hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-14 h-14 bg-brand-red-light rounded-xl flex items-center justify-center mb-6">
-              <Users className="w-8 h-8 text-brand-red" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3 font-display">Personalized Training</h3>
-            <p className="text-gray-600 leading-relaxed">
-              One-on-one instruction tailored to your learning pace and driving goals.
-            </p>
-          </div>
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-20 bg-gray-50/50 border border-gray-100 rounded-3xl p-10 md:p-12 shadow-xs">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-200/60">
-            <div className="text-center pt-6 md:pt-0">
-              <div className="text-4xl md:text-5xl font-black text-brand-red font-display tracking-tight">5000+</div>
-              <p className="text-gray-500 font-semibold mt-2 text-sm uppercase tracking-wider">Students Trained</p>
-            </div>
-            <div className="text-center pt-6 md:pt-0">
-              <div className="text-4xl md:text-5xl font-black text-brand-red font-display tracking-tight">98%</div>
-              <p className="text-gray-500 font-semibold mt-2 text-sm uppercase tracking-wider">Pass Rate</p>
-            </div>
-            <div className="text-center pt-6 md:pt-0">
-              <div className="text-4xl md:text-5xl font-black text-brand-red font-display tracking-tight">50+</div>
-              <p className="text-gray-500 font-semibold mt-2 text-sm uppercase tracking-wider">Expert Instructors</p>
-            </div>
-            <div className="text-center pt-6 md:pt-0">
-              <div className="text-4xl md:text-5xl font-black text-brand-red font-display tracking-tight">10+</div>
-              <p className="text-gray-500 font-semibold mt-2 text-sm uppercase tracking-wider">Years Experience</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

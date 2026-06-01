@@ -64,7 +64,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-white relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-28 bg-[#fafafa] relative overflow-hidden">
       {/* Decorative layout accents */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-brand-red/2 rounded-full blur-3xl -z-10 animate-pulse"></div>
       <div className="absolute bottom-10 right-10 w-80 h-80 bg-brand-red/3 rounded-full blur-3xl -z-10"></div>
