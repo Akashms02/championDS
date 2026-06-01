@@ -73,10 +73,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4 font-display">Quick Links</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><a href="#home" className="hover:text-brand-red transition">Home</a></li>
-              <li><a href="#about" className="hover:text-brand-red transition">About</a></li>
-              <li><a href="#testimonials" className="hover:text-brand-red transition">Testimonials</a></li>
-              <li><a href="#contact" className="hover:text-brand-red transition">Contact</a></li>
+              <li><a href="/" className="hover:text-brand-red transition">Home</a></li>
+              <li><a href="/about" className="hover:text-brand-red transition">About</a></li>
+              <li><a href="/testimonials" className="hover:text-brand-red transition">Testimonials</a></li>
+              <li><a href="/contact" className="hover:text-brand-red transition">Contact</a></li>
             </ul>
           </div>
  
@@ -84,10 +84,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4 font-display">Services</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><a href="#contact" className="hover:text-brand-red transition">Driving Lessons</a></li>
-              <li><a href="#contact" className="hover:text-brand-red transition">License Test Prep</a></li>
-              <li><a href="#contact" className="hover:text-brand-red transition">Defensive Driving</a></li>
-              <li><a href="#contact" className="hover:text-brand-red transition">Refresher Courses</a></li>
+              <li><a href="/contact" className="hover:text-brand-red transition">Driving Lessons</a></li>
+              <li><a href="/contact" className="hover:text-brand-red transition">License Test Prep</a></li>
+              <li><a href="/contact" className="hover:text-brand-red transition">Defensive Driving</a></li>
+              <li><a href="/contact" className="hover:text-brand-red transition">Refresher Courses</a></li>
             </ul>
           </div>
  

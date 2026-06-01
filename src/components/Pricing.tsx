@@ -48,7 +48,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-16 md:py-24 bg-gray-50/50 relative overflow-hidden">
+    <section id="pricing" className="py-16 md:py-24 bg-[#fafafa] relative overflow-hidden">
       {/* Background accents */}
       <div className="absolute top-1/2 left-0 w-80 h-80 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
       <div className="absolute bottom-0 right-10 w-64 h-64 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
@@ -120,7 +120,7 @@ export default function Pricing() {
             Need a custom package? <span className="font-bold text-brand-red">Contact us for special pricing</span>
           </p>
           <a
-            href="#contact"
+            href="/contact"
             className="inline-block bg-brand-red text-white px-8 py-3.5 rounded-full hover:bg-brand-red-hover transition-all duration-300 font-bold shadow-md shadow-brand-red/10 hover:shadow-lg hover:shadow-brand-red/20 cursor-pointer"
           >
             Contact Sales Team

@@ -11,17 +11,20 @@ export default function Navigation() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Simple active section detection
       const sections = ['home', 'about', 'pricing', 'testimonials', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
+          const rect = el.getBoundingClientRect();
+          // Element matches if its top is near/above viewport top and bottom is below viewport top
+          if (rect.top <= 150 && rect.bottom > 150) {
             setActiveSection(section);
+            
+            // Update URL pathname on scroll without page reload or hash
+            const newPath = section === 'home' ? '/' : `/${section}`;
+            if (window.location.pathname !== newPath) {
+              window.history.replaceState(null, '', newPath);
+            }
             break;
           }
         }
@@ -33,22 +36,22 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: 'Home', href: '/#home', id: 'home' },
-    { label: 'About us', href: '/#about', id: 'about' },
-    { label: 'Pricing', href: '/#pricing', id: 'pricing' },
-    { label: 'Testimonials', href: '/#testimonials', id: 'testimonials' },
-    { label: 'Contact us', href: '/#contact', id: 'contact' },
+    { label: 'Home', href: '/', id: 'home' },
+    { label: 'About us', href: '/about', id: 'about' },
+    { label: 'Pricing', href: '/pricing', id: 'pricing' },
+    { label: 'Testimonials', href: '/testimonials', id: 'testimonials' },
+    { label: 'Contact us', href: '/contact', id: 'contact' },
   ];
 
   return (
     <nav className={`fixed w-full top-0 left-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-white/80 backdrop-blur-sm py-4'
+      scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-[#FAFAFA] backdrop-blur-sm py-4'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           
           {/* Logo Section - Custom logo applied with a premium clean look */}
-          <a href="/#home" className="flex items-center gap-3 animate-fade-in-down">
+          <a href="/" className="flex items-center gap-3 animate-fade-in-down">
             <div className="h-14 md:h-16 w-auto flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
               <img 
                 src="/logo.svg" 
@@ -64,21 +67,18 @@ export default function Navigation() {
           
           {/* Desktop Menu - Centered Rounded Pill as in the reference */}
           <div className="hidden md:flex items-center justify-center flex-1">
-            <div className="bg-white border border-gray-150 px-6 py-2 rounded-xl shadow-xs flex items-center gap-6 lg:gap-8">
+            <div className="bg-white px-6 py-2 rounded-xl shadow-xs flex items-center gap-6 lg:gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
                   href={link.href}
-                  className={`transition-colors duration-300 font-medium text-sm px-1 py-0.5 relative group ${
+                  className={`transition-colors duration-300 font-semibold text-sm px-3 py-1.5 relative group ${
                     activeSection === link.id
                       ? 'text-brand-red'
                       : 'text-gray-600 hover:text-brand-red'
                   }`}
                 >
                   {link.label}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-brand-red transform origin-left transition-transform duration-300 ${
-                    activeSection === link.id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                  }`}></span>
                 </a>
               ))}
             </div>
@@ -123,7 +123,7 @@ export default function Navigation() {
             ))}
             <div className="pt-2 px-4">
               <a
-                href="/#contact"
+                href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-center bg-brand-red text-white py-3 rounded-lg hover:bg-brand-red-hover transition font-semibold"
               >

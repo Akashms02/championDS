@@ -20,7 +20,7 @@ export default function Testimonials() {
   ];
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-white relative overflow-hidden">
+    <section id="testimonials" className="py-16 md:py-24 bg-[#fafafa] relative overflow-hidden">
       {/* Decorative gradients */}
       <div className="absolute top-1/4 right-0 w-72 h-72 bg-brand-red/2 rounded-full blur-3xl -z-10"></div>
       

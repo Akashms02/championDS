@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import About from './components/About';
@@ -7,8 +8,40 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (anchor) {
+        const href = anchor.getAttribute('href');
+        if (href) {
+          const cleanHref = href.replace(/^\//, '');
+          const targetId = cleanHref.startsWith('#') ? cleanHref.slice(1) : cleanHref;
+          const validSections = ['home', 'about', 'pricing', 'testimonials', 'contact'];
+
+          if (validSections.includes(targetId) || href === '/' || href === '/#') {
+            e.preventDefault();
+            const id = targetId === 'home' || !targetId ? 'home' : targetId;
+            const element = document.getElementById(id);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+
+              const newPath = id === 'home' ? '/' : `/${id}`;
+              if (window.location.pathname !== newPath) {
+                window.history.pushState(null, '', newPath);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+    return () => document.removeEventListener('click', handleAnchorClick);
+  }, []);
+
   return (
-    <div className="bg-white text-gray-900 font-sans relative">
+    <div className="bg-[#fafafa] text-gray-900 font-sans relative">
       <Navigation />
       <Home />
       <About />
