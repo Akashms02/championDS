@@ -114,7 +114,7 @@ export default function Home() {
           </div>
 
           {/* Bottom Right - Description paragraph (clamped max-width on smaller screens to prevent collision) */}
-          <div className="mt-4 md:mt-0 md:absolute md:bottom-12 lg:bottom-16 xl:bottom-22 md:right-6 lg:right-0 xl:right-[-40px] md:max-w-[280px] lg:max-w-[340px] xl:max-w-[420px] text-left font-display text-gray-600 text-sm md:text-base lg:text-lg font-medium leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="mt-4 md:mt-0 md:absolute md:bottom-12 lg:bottom-16 xl:bottom-22 md:right-6 lg:right-0 xl:right-[-40px] md:max-w-[280px] lg:max-w-[340px] xl:max-w-[420px] text-left text-gray-600 text-sm md:text-base lg:text-lg font-medium leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <p className="w-full">
               Professional Driving School With Expert Instructors Learn Safe, Confident Driving Skills From Experienced Professionals
             </p>

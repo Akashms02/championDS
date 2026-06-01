@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
@@ -79,18 +79,6 @@ export default function Footer() {
               <li><a href="/contact" className="hover:text-brand-red transition">Contact</a></li>
             </ul>
           </div>
- 
-          {/* Services */}
-          <div>
-            <h4 className="text-lg font-bold mb-4 font-display">Services</h4>
-            <ul className="space-y-2.5 text-sm text-gray-400">
-              <li><a href="/contact" className="hover:text-brand-red transition">Driving Lessons</a></li>
-              <li><a href="/contact" className="hover:text-brand-red transition">License Test Prep</a></li>
-              <li><a href="/contact" className="hover:text-brand-red transition">Defensive Driving</a></li>
-              <li><a href="/contact" className="hover:text-brand-red transition">Refresher Courses</a></li>
-            </ul>
-          </div>
- 
           {/* Contact */}
           <div>
             <h4 className="text-lg font-bold mb-4 font-display">Contact Info</h4>
@@ -112,8 +100,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+        <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p>&copy; 2026 Prime Champion Drive Academy. All rights reserved.</p>
+          <p className="text-xs text-gray-500 font-medium font-display">
+            Crafter with <a href="https://www.gmaxepay.com/" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:text-brand-red-hover hover:underline transition-colors duration-300">gmaxepay</a>
+          </p>
         </div>
       </div>
     </footer>

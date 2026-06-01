@@ -104,7 +104,7 @@ export default function About() {
           About Us
         </h2>
         
-        <div className="space-y-6 text-gray-700 font-medium text-sm sm:text-base md:text-lg leading-relaxed max-w-xl text-left font-display">
+        <div className="space-y-6 text-gray-700 font-medium text-sm sm:text-base md:text-lg leading-relaxed max-w-xl text-left">
           <p>
             {renderWords(words1, 0)}
           </p>

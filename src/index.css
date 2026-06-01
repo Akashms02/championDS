@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Kanit', sans-serif;
+  --font-sans: 'Lohit Bengali', 'Kanit', sans-serif;
   --font-display: 'Kanit', sans-serif;
   
   --color-brand-red: #F60002;
@@ -22,6 +22,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 1px;
+}
+
+/* Global Font Overrides: Keep headings, buttons, navigation, and links in Kanit */
+h1, h2, h3, h4, h5, h6, button, nav a, footer a, .font-display {
+  font-family: var(--font-display) !important;
 }
 
 body {
