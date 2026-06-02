@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const EMAILJS_SERVICE_ID = 'service_xeh703b';
 const EMAILJS_TEMPLATE_ID = 'template_1b57kwy';
