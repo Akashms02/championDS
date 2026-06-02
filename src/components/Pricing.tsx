@@ -6,7 +6,7 @@ export default function Pricing() {
     return parts.map((part, idx) => {
       if (/^(\d+|[₹/])$/.test(part)) {
         return (
-          <span key={idx} className="font-display font-extrabold text-gray-900 group-hover:text-white transition-colors duration-300">
+          <span key={idx} className="font-display font-extrabold text-gray-900 group-hover:text-brand-red transition-colors duration-300">
             {part}
           </span>
         );
@@ -79,7 +79,7 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className="group relative p-8 rounded-2xl transition-all duration-300 transform hover:scale-105 flex flex-col justify-between bg-white shadow-lg text-gray-900 border border-gray-100 hover:bg-brand-red hover:text-white hover:shadow-2xl hover:border-brand-red-hover cursor-pointer"
+              className="group relative p-8 rounded-2xl transition-all duration-300 transform hover:scale-105 flex flex-col justify-between bg-white shadow-lg text-gray-900 border border-gray-100 hover:bg-brand-red/8 hover:border-brand-red/25 hover:shadow-2xl cursor-pointer"
             >
               {plan.highlighted && (
                 <div className="absolute top-0 right-0 bg-yellow-400 text-gray-950 px-4 py-1 rounded-tr-2xl rounded-bl-xl font-black text-xs uppercase tracking-wider z-20">
@@ -88,14 +88,14 @@ export default function Pricing() {
               )}
 
               <div>
-                <h3 className="text-2xl font-bold mb-2 font-display">{plan.name}</h3>
-                <p className="text-sm mb-5 leading-relaxed text-gray-500 group-hover:text-brand-red-light/95 transition-colors duration-300">
+                <h3 className="text-2xl font-bold mb-2 font-display group-hover:text-brand-red transition-colors duration-300">{plan.name}</h3>
+                <p className="text-sm mb-5 leading-relaxed text-gray-500 transition-colors duration-300">
                   {plan.description}
                 </p>
 
                 <div className="mb-6">
-                  <span className="text-4xl font-extrabold font-display">{plan.price}</span>
-                  <span className="text-sm ml-2 font-semibold text-gray-500 group-hover:text-brand-red-light/85 transition-colors duration-300">
+                  <span className="text-4xl font-extrabold font-display group-hover:text-brand-red transition-colors duration-300">{plan.price}</span>
+                  <span className="text-sm ml-2 font-semibold text-gray-500 transition-colors duration-300">
                     {renderPricingText(plan.period)}
                   </span>
                 </div>
@@ -105,7 +105,7 @@ export default function Pricing() {
                     <li key={feature} className="flex items-center gap-3">
                       <CheckCircle
                         size={18}
-                        className="text-brand-red shrink-0 group-hover:text-yellow-300 transition-colors duration-300"
+                        className="text-brand-red shrink-0 transition-colors duration-300"
                       />
                       <span className="text-sm font-medium">{renderPricingText(feature)}</span>
                     </li>

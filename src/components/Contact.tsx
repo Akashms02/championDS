@@ -154,11 +154,11 @@ export default function Contact() {
                   <div>
                     <p className="text-xs font-bold text-gray-450 uppercase tracking-wider">Main Branch</p>
                     <p className="text-xs md:text-sm text-gray-300 leading-relaxed font-medium group-hover:text-white transition">
-                      2nd Floor, No 712, Modi Hospital Rd, Mahalakshmi Puram, Stage 2, Nagapura, Bengaluru, 560086
+                      Saraswathipura, Nandini Layout, Bengaluru, Karnataka 560096
                     </p>
-                    <span className="text-[10px] font-bold text-brand-red group-hover:underline flex items-center gap-1 mt-1">
+                    {/* <span className="text-[10px] font-bold text-brand-red group-hover:underline flex items-center gap-1 mt-1">
                       Open in Google Maps <ArrowRight size={10} />
-                    </span>
+                    </span> */}
                   </div>
                 </a>
               </div>

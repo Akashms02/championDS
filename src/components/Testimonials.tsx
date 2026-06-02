@@ -3,22 +3,22 @@ import { useState, useEffect } from 'react';
 export default function Testimonials() {
   const testimonials = [
     {
-      name: 'Sarah Johnson',
-      role: 'Passed First Attempt',
-      feedback: "Champion's instructors were incredibly patient and professional. I felt confident behind the wheel from day one!",
-      img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600&h=600'
+      name: 'Ramesh Chandra',
+      role: 'Senior Learner',
+      feedback: "Prime Champion's instructors were incredibly patient and professional. I felt confident behind the wheel from day one!",
+      img: '/pic1.png'
     },
     {
-      name: 'Michael Chen',
-      role: 'Certified Driver',
-      feedback: "The best driving school in town! Professional, affordable, and the instructors really care about your progress.",
-      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=600'
+      name: 'Sunitha Reddy',
+      role: 'Software Engineer',
+      feedback: "The best driving school in town! Professional, affordable, and they make learning to drive extremely comfortable.",
+      img: '/pic2.png'
     },
     {
-      name: 'Emma Wilson',
-      role: 'Confident Driver',
-      feedback: "I was nervous about driving, but Champion made it easy and fun. Highly recommend to anyone learning to drive!",
-      img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=600&h=600'
+      name: 'Karthik Sen',
+      role: 'College Student',
+      feedback: "I was nervous about driving, but Prime Champion made it easy and fun. Highly recommend to anyone learning to drive!",
+      img: '/pic3.png'
     }
   ];
 

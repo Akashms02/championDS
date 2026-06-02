@@ -8,7 +8,10 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="h-12 w-auto flex items-center justify-center overflow-hidden">
+              <a 
+                href="/#home" 
+                className="h-12 w-auto flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105"
+              >
                 <img 
                   src="/logo.svg" 
                   alt="Prime Champion Drive Academy" 
@@ -17,7 +20,7 @@ export default function Footer() {
                     (e.target as HTMLImageElement).src = '/logo.png';
                   }}
                 />
-              </div>
+              </a>
             </div>
             <p className="text-gray-400 text-sm mb-6">Professional driving school committed to your safety and confidence.</p>
             {/* Social Icons */}
@@ -92,7 +95,7 @@ export default function Footer() {
               <li className="flex gap-2 text-xs leading-relaxed">
                 <MapPin size={15} className="shrink-0 mt-0.5 text-brand-red" />
                 <span>
-                  2nd Floor, No 712, Modi Hospital Rd, Mahalakshmi Puram, Stage 2, Nagapura, Bengaluru, Karnataka 560086
+                  Saraswathipura, Nandini Layout, Bengaluru, Karnataka 560096
                 </span>
               </li>
             </ul>
@@ -103,7 +106,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p>&copy; 2026 Prime Champion Drive Academy. All rights reserved.</p>
           <p className="text-xs text-gray-500 font-medium font-display">
-            Crafter with <a href="https://www.gmaxepay.com/" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:text-brand-red-hover hover:underline transition-colors duration-300">gmaxepay</a>
+            Crafter with <a href="https://www.gmaxepay.com/" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:text-brand-red-hover hover:underline transition-colors duration-300">Gmaxepay</a>
           </p>
         </div>
       </div>
