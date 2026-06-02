@@ -25,8 +25,9 @@ export default function Home() {
             className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl leading-tight text-left select-none"
             style={{ letterSpacing: '1px' }}
           >
-            <span className="text-brand-red block">Champion Driving</span>
-            <span className="text-gray-800 block mt-1">School</span>
+            <span className="text-gray-800 block">Prime</span>
+            <span className="text-brand-red block mt-1">Champion Drive</span>
+            <span className="text-gray-800 block mt-1">Academy</span>
           </h1>
         </div>
 
@@ -46,7 +47,7 @@ export default function Home() {
               <div className="absolute w-[85vw] max-w-[340px] sm:max-w-none sm:w-[420px] md:w-[550px] lg:w-[680px] xl:w-[780px] z-10 animate-drive-in pointer-events-auto">
                 <img 
                   src="/car.svg" 
-                  alt="Champion Driving School Training Vehicle" 
+                  alt="Prime Champion Drive Academy Training Vehicle" 
                   className="w-full h-auto object-contain drop-shadow-[0_18px_35px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 transition-transform duration-500 cursor-pointer"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/logo.svg';
